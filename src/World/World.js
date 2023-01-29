@@ -9,6 +9,7 @@ export class World {
     #camera
     #renderer
     #loop
+    #controls
     constructor(parent) {
         if (!parent) {
             parent = new BaseElement()
@@ -20,7 +21,9 @@ export class World {
         this.#scene = createScene();
         this.#camera = createCamera();
         this.#renderer = createRenderer(this.#scene, this.#camera);
+        parent.append(this.#renderer.domElement);
         this.#loop = new Loop(this.#scene, this.#camera, this.#renderer);
+        this.#controls = createControls(this.#camera, this.#renderer.domElement);
         new Resizer(parent, this.#camera, this.#renderer);
     }
 
