@@ -1,7 +1,8 @@
 import {WebGLRenderer} from "three";
 
-export function createRenderer(scene, camera) {
-  const renderer = new WebGLRenderer(scene, camera);
+export function createRenderer() {
+  const renderer = new WebGLRenderer({antialias: true});
+  renderer.physicallyCorrectLights = true;
 
   return renderer;
 }

@@ -7,15 +7,15 @@ export function createLights() {
   );
   directionalLight.position.set(10,10,10);
 
-  // const ambientLight = new HemisphereLight(
-  //   'white',
-  //   'darkslategrey',
-  //   3
-  // );
-  const ambientLight = new AmbientLight(
+  const ambientLight = new HemisphereLight(
     'white',
-    2
+    'darkslategrey',
+    3
   );
+  // const ambientLight = new AmbientLight(
+  //   'white',
+  //   2
+  // );
 
   return {
     directionalLight,

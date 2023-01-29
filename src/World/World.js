@@ -24,7 +24,7 @@ export class World {
 
         this.#scene = createScene();
         this.#camera = createCamera();
-        this.#renderer = createRenderer(this.#scene, this.#camera);
+        this.#renderer = createRenderer();
         parent.append(this.#renderer.domElement);
         this.#loop = new Loop(this.#scene, this.#camera, this.#renderer);
         this.#controls = createControls(this.#camera, this.#renderer.domElement);
