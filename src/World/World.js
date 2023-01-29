@@ -3,6 +3,8 @@ import {createScene} from "./components/scene";
 import {createCamera} from "./components/camera";
 import {createRenderer} from "./system/renderer";
 import {Loop} from "./system/Loop";
+import {createControls} from "./system/controls";
+import {Resizer} from "./system/Resizer";
 
 export class World {
     #scene
