@@ -1,7 +1,12 @@
+html {
+    height: 100vh;
+}
+
 body {
     /* remove margins and scroll bars */
     margin: 0;
     overflow: hidden;
+    height: 100%;
 
     /* style text */
     text-align: center;
@@ -31,16 +36,5 @@ h1 {
       Set the container's background color to the same as the scene's
       background to prevent flashing on load
     */
-    background-color: skyblue;
-}
-
-
-
-.control-panel {
-    position: absolute;
-    z-index: 2;
-
-    left: 50%;
-    transform: translateX(-50%);
-    top: 5%;
+    /*background-color: skyblue;*/
 }

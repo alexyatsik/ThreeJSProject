@@ -15,7 +15,7 @@ export class Loop {
   }
 
   start() {
-    this.#renderer.requestAnimationFrame(()=> {
+    this.#renderer.setAnimationLoop(()=> {
       this.#tick();
 
       this.#renderer.render(this.#scene, this.#camera);
@@ -23,7 +23,7 @@ export class Loop {
   }
 
   stop() {
-    this.#renderer.requestAnimationFrame(null);
+    this.#renderer.setAnimationLoop(null);
   }
 
   addUpdatable(...updatables) {
@@ -32,7 +32,7 @@ export class Loop {
 
   #tick() {
     const delta = this.#clock.getDelta();
-    for(const object in this.#updatables) {
+    for(const object of this.#updatables) {
       object.tick(delta);
     }
   }

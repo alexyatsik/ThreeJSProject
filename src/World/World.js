@@ -6,6 +6,7 @@ import {Loop} from "./system/Loop";
 import {createControls} from "./system/controls";
 import {Resizer} from "./system/Resizer";
 import {createLights} from "./components/lights";
+import {createCube} from "./components/cube";
 
 export class World {
     #scene
@@ -18,7 +19,7 @@ export class World {
             parent = new BaseElement()
                 .appendTo(document.body)
                 .DOMElement;
-            parent.DOMElement.id = 'scene-container';
+            parent.id = 'scene-container';
         }
 
         this.#scene = createScene();
