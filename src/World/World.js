@@ -27,6 +27,16 @@ export class World {
         this.#loop = new Loop(this.#scene, this.#camera, this.#renderer);
         this.#controls = createControls(this.#camera, this.#renderer.domElement);
         new Resizer(parent, this.#camera, this.#renderer);
+
+        const cube = createCube(2, 'palegreen');
+
+        this.#scene.add(
+          cube
+        );
+        this.#loop.addUpdatable(
+          cube
+        );
+
     }
 
     async init() {
