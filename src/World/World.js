@@ -2,11 +2,13 @@ import {BaseElement} from "../utils/BaseElement";
 import {createScene} from "./components/scene";
 import {createCamera} from "./components/camera";
 import {createRenderer} from "./system/renderer";
+import {Loop} from "./system/Loop";
 
 export class World {
     #scene
     #camera
     #renderer
+    #loop
     constructor(parent) {
         if (!parent) {
             parent = new BaseElement()
@@ -19,6 +21,7 @@ export class World {
         this.#camera = createCamera();
         this.#renderer = createRenderer(this.#scene, this.#camera);
         this.#loop = new Loop(this.#scene, this.#camera, this.#renderer);
+        new Resizer(parent, this.#camera, this.#renderer);
     }
 
     async init() {
