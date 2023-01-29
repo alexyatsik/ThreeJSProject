@@ -5,6 +5,7 @@ import {createRenderer} from "./system/renderer";
 import {Loop} from "./system/Loop";
 import {createControls} from "./system/controls";
 import {Resizer} from "./system/Resizer";
+import {createLights} from "./components/lights";
 
 export class World {
     #scene
@@ -28,15 +29,18 @@ export class World {
         this.#controls = createControls(this.#camera, this.#renderer.domElement);
         new Resizer(parent, this.#camera, this.#renderer);
 
+        const lights = createLights();
         const cube = createCube(2, 'palegreen');
 
         this.#scene.add(
+          lights.ambientLight,
+          lights.directionalLight,
           cube
         );
         this.#loop.addUpdatable(
+          this.#controls,
           cube
         );
-
     }
 
     async init() {
