@@ -8,6 +8,8 @@ import {Resizer} from "./system/Resizer";
 import {createLights} from "./components/lights";
 import {createCube} from "./components/cube";
 import {createSphere} from "./components/sphere";
+import {createGlobe} from "./components/earthGlobe/globe";
+import {createAtmosphere} from "./components/earthGlobe/atmosphere";
 
 
 export class World {
@@ -40,13 +42,15 @@ export class World {
     }
 
     async init() {
-        const sphere = createSphere(
-          5,
-          50,
-          50
-        );
+        const globe = createGlobe();
+        const atmosphere = createAtmosphere();
+
         this.#scene.add(
-          sphere
+            globe,
+            atmosphere
+        );
+        this.#loop.addUpdatable(
+            globe
         );
     }
 
