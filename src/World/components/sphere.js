@@ -1,4 +1,5 @@
-import {Mesh, MeshBasicMaterial, SphereGeometry} from "three";
+import {Mesh, MeshBasicMaterial, SphereGeometry, ShaderMaterial} from "three";
+import vertexShader from '../../assets/shaders/vertex.glsl';
 
 export function createSphere(radius, widthSegments, heightSegments, skin) {
   let mapType = 'color';
@@ -6,8 +7,9 @@ export function createSphere(radius, widthSegments, heightSegments, skin) {
     mapType = 'map';
 
   const geometry = new SphereGeometry(radius, widthSegments, heightSegments);
-  const material = new MeshBasicMaterial({
-    [mapType] : skin
+  const material = new ShaderMaterial({
+    // vertexShader: ,
+    // fragmentShader:
   })
 
   const sphere = new Mesh(geometry, material);
