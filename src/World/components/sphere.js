@@ -1,4 +1,5 @@
 import {Mesh, MeshBasicMaterial, SphereGeometry, ShaderMaterial} from "three";
+// const shader = require('../../assets/shaders/vertex.glsl');
 import vertexShader from '../../assets/shaders/vertex.glsl';
 
 export function createSphere(radius, widthSegments, heightSegments, skin) {

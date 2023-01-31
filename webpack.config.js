@@ -25,7 +25,17 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
             },
+            {
+                test: /\.glsl$/,
+                use: ['webpack-glsl-loader']
+            }
         ],
+        // loaders: [
+        //     {
+        //         test: /\.glsl$/,
+        //         loader: 'webpack-glsl'
+        //     }
+        // ]
     },
     output: {
         filename: '[name].bundle.js',

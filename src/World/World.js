@@ -47,7 +47,7 @@ export class World {
           5,
           50,
           50,
-          globeTexture
+          null
         );
         this.#scene.add(
           sphere
