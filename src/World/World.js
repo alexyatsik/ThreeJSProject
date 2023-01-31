@@ -8,8 +8,7 @@ import {Resizer} from "./system/Resizer";
 import {createLights} from "./components/lights";
 import {createCube} from "./components/cube";
 import {createSphere} from "./components/sphere";
-import {TextureLoader} from "three";
-import earth_uv_map from '../assets/maps/earth_uv_map.jpg';
+
 
 export class World {
     #scene
