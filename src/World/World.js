@@ -41,13 +41,10 @@ export class World {
     }
 
     async init() {
-        // const globeTexture = await new TextureLoader().load(earth_uv_map);
-
         const sphere = createSphere(
           5,
           50,
-          50,
-          null
+          50
         );
         this.#scene.add(
           sphere
