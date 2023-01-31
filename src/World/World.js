@@ -30,10 +30,10 @@ export class World {
         this.#renderer = createRenderer();
         parent.append(this.#renderer.domElement);
         this.#loop = new Loop(this.#scene, this.#camera, this.#renderer);
-        this.#controls = createControls(this.#camera, this.#renderer.domElement);
+        // this.#controls = createControls(this.#camera, this.#renderer.domElement);
         new Resizer(parent, this.#camera, this.#renderer);
 
-        const lights = createLights();
+        // const lights = createLights();
 
         const map = new TextureLoader().load(earth_uv_map);
         const sphere = createSphere(
@@ -47,7 +47,7 @@ export class World {
           sphere
         );
         this.#loop.addUpdatable(
-          this.#controls,
+          // this.#controls,
         );
     }
 
