@@ -35,24 +35,22 @@ export class World {
 
         // const lights = createLights();
 
-        const map = new TextureLoader().load(earth_uv_map);
-        const sphere = createSphere(
-          5,
-          50,
-          50,
-          map
-        );
-
-        this.#scene.add(
-          sphere
-        );
         this.#loop.addUpdatable(
           // this.#controls,
         );
     }
 
     async init() {
-
+        const globeTexture = await new TextureLoader().load(earth_uv_map);
+        const sphere = createSphere(
+          5,
+          50,
+          50,
+          globeTexture
+        );
+        this.#scene.add(
+          sphere
+        );
     }
 
     render() {
