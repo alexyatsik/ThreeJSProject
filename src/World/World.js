@@ -7,6 +7,9 @@ import {createControls} from "./system/controls";
 import {Resizer} from "./system/Resizer";
 import {createLights} from "./components/lights";
 import {createCube} from "./components/cube";
+import {createSphere} from "./components/sphere";
+import {TextureLoader} from "three";
+import earth_uv_map from '../assets/maps/earth_uv_map.jpg';
 
 export class World {
     #scene
@@ -31,16 +34,20 @@ export class World {
         new Resizer(parent, this.#camera, this.#renderer);
 
         const lights = createLights();
-        const cube = createCube(2, 'palegreen');
+
+        const map = new TextureLoader().load(earth_uv_map);
+        const sphere = createSphere(
+          5,
+          50,
+          50,
+          map
+        );
 
         this.#scene.add(
-          lights.ambientLight,
-          lights.directionalLight,
-          cube
+          sphere
         );
         this.#loop.addUpdatable(
           this.#controls,
-          cube
         );
     }
 

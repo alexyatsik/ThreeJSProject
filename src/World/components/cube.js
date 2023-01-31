@@ -4,7 +4,7 @@ import {degToRad} from "three/src/math/MathUtils";
 export function createCube(size, color) {
   const geometry = new BoxGeometry(size, size, size);
   const material = new MeshStandardMaterial({
-    color: color
+    map: color
   });
   const cube = new Mesh(geometry, material);
   const radians = degToRad(30);
