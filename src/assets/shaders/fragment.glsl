@@ -1,6 +1,7 @@
-uniform sampler2D globalTexture;
+uniform sampler2D globeTexture;
+varying vec2 vertexUV;
 
 void main() {
-    texture2D(globalTexture);
-    gl_FragColor = vec4(1, 0, 0, 1);
+    texture2D(globeTexture, vertexUV);
+    gl_FragColor = texture2D(globeTexture, vertexUV);
 }
