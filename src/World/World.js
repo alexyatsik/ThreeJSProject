@@ -6,11 +6,8 @@ import {Loop} from "./system/Loop";
 import {createControls} from "./system/controls";
 import {Resizer} from "./system/Resizer";
 import {createLights} from "./components/lights";
-import {createCube} from "./components/cube";
-import {createSphere} from "./components/sphere";
-import {createGlobe} from "./components/earthGlobe/globe";
-import {createAtmosphere} from "./components/earthGlobe/atmosphere";
-
+import {createEarthGlobe} from "./components/earthGlobe/earthGlobe";
+import {createStars} from "./components/earthGlobe/stars";
 
 export class World {
     #scene
@@ -42,15 +39,15 @@ export class World {
     }
 
     async init() {
-        const globe = createGlobe();
-        const atmosphere = createAtmosphere();
-
+        const earthGroup = createEarthGlobe();
+        const stars = createStars();
         this.#scene.add(
-            globe,
-            atmosphere
+            earthGroup.earthGlobeGroup,
+            stars
         );
         this.#loop.addUpdatable(
-            globe
+            earthGroup.globe,
+            earthGroup.earthGlobeGroup
         );
     }
 
