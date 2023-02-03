@@ -1,9 +1,10 @@
 import {WebGLRenderer} from "three";
 
-export function createRenderer() {
-  const renderer = new WebGLRenderer(
-    {antialias: true}
-  );
+export function createRenderer(canvas) {
+  const renderer = new WebGLRenderer({
+    antialias: true,
+    canvas
+  });
   renderer.physicallyCorrectLights = true;
 
   return renderer;

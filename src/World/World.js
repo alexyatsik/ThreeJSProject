@@ -15,18 +15,14 @@ export class World {
     #renderer
     #loop
     #controls
-    constructor(parent) {
-        if (!parent) {
-            parent = new BaseElement()
-                .appendTo(document.body)
-                .DOMElement;
-            parent.id = 'scene-container';
-        }
+    constructor(parent = document.body) {
+        const canvas = new BaseElement('canvas')
+            .appendTo(parent);
 
         this.#scene = createScene();
         this.#camera = createCamera();
-        this.#renderer = createRenderer();
-        parent.append(this.#renderer.domElement);
+        this.#renderer = createRenderer(canvas.DOMElement);
+        // parent.append(this.#renderer.domElement);
         this.#loop = new Loop(this.#scene, this.#camera, this.#renderer);
         // this.#controls = createControls(this.#camera, this.#renderer.domElement);
         new Resizer(parent, this.#camera, this.#renderer);

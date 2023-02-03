@@ -47,7 +47,7 @@ export class BaseElement {
             throw new Error('The BaseElement is absent');
         if (!name)
             throw new Error('An incorrect attribute name');
-        if (!value) {
+        if (value === undefined || value === '') {
             console.log(value);
             throw new Error('An incorrect value');
         }
@@ -73,7 +73,7 @@ export class BaseElement {
             throw new Error('The BaseElement is absent');
         if (!style)
             throw new Error('An incorrect style name');
-        if (!value)
+        if (value === undefined || value === '')
             throw new Error('An incorrect value');
 
         this.#baseElement.style[kebabToCamelCase(style)] = value;
@@ -115,7 +115,7 @@ export class BaseElement {
     addInnerHtml(value) {
         if (!this.#baseElement)
             throw new Error('The BaseElement is absent');
-        if (!value)
+        if (value === undefined)
             throw new Error('An incorrect value');
 
         this.#baseElement.innerHTML += value;
