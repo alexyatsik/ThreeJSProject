@@ -43,35 +43,40 @@ export class Earth {
     }
 
     #addCountriesPointsToTheGroup() {
+        const pointOptions = {
+            radius: this.#radius,
+            lookAtPoint: this.#globe.mesh.position
+        }
+
         this.#earthGroup.add(
             // Ukraine
-            new Point(48.3794, 31.1656, this.#radius).mesh,
+            new Point(48.3794, 31.1656, pointOptions).mesh,
             // Italy
-            new Point(41.8719, 12.5674, this.#radius).mesh,
+            new Point(41.8719, 12.5674, pointOptions).mesh,
             // Brazil
-            new Point(-14.2350, -51.9253, this.#radius).mesh,
+            new Point(-14.2350, -51.9253, pointOptions).mesh,
             // USA
-            new Point(37.0902, -95.7129, this.#radius).mesh,
+            new Point(37.0902, -95.7129, pointOptions).mesh,
             // China
-            new Point(35.8617, 104.1954, this.#radius).mesh,
+            new Point(35.8617, 104.1954, pointOptions).mesh,
             // Japan
-            new Point(36.2048, 138.2529, this.#radius).mesh,
+            new Point(36.2048, 138.2529, pointOptions).mesh,
             // UK
-            new Point(55.3781, -3.4360, this.#radius).mesh,
+            new Point(55.3781, -3.4360, pointOptions).mesh,
             // Canada
-            new Point(56.1304, -106.3468, this.#radius).mesh,
+            new Point(56.1304, -106.3468, pointOptions).mesh,
             // UAE
-            new Point(23.4241, 53.8478, this.#radius).mesh,
+            new Point(23.4241, 53.8478, pointOptions).mesh,
             // Israel
-            new Point(31.0461, 34.8516, this.#radius).mesh,
+            new Point(31.0461, 34.8516, pointOptions).mesh,
             // India
-            new Point(20.5937, 78.9629, this.#radius).mesh,
+            new Point(20.5937, 78.9629, pointOptions).mesh,
             // Argentina
-            new Point(-38.4161, -63.6167, this.#radius).mesh,
+            new Point(-38.4161, -63.6167, pointOptions).mesh,
             // Zimbabwe
-            new Point(-19.0154, 29.1549, this.#radius).mesh,
+            new Point(-19.0154, 29.1549, pointOptions).mesh,
             // Congo
-            new Point(-4.0383, 21.7587, this.#radius).mesh,
+            new Point(-4.0383, 21.7587, pointOptions).mesh,
         )
     }
 }

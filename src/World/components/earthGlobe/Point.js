@@ -1,9 +1,10 @@
-import {Mesh, MeshBasicMaterial, SphereGeometry} from "three";
+import {BoxGeometry, Matrix4, Mesh, MeshBasicMaterial, SphereGeometry} from "three";
 import {degToRad} from "three/src/math/MathUtils";
 
 export class Point {
     #point
-    constructor(latitude, longitude, radius) {
+    constructor(latitude, longitude, options) {
+        const {radius, lookAtPoint} = options;
         if (latitude === undefined || longitude === undefined || radius === undefined)
             throw new Error('Latitude, longitude or radius is not set');
 
@@ -11,12 +12,21 @@ export class Point {
         const y = radius * Math.sin(degToRad(latitude));
         const z = radius * Math.cos(degToRad(latitude)) * Math.cos(degToRad(longitude));
 
-        const geometry = new SphereGeometry(0.1, 50, 50);
+        const boxGeometryParams = {
+            x: 0.1,
+            y: 0.1,
+            z: 0.8
+        }
+        const geometry = new BoxGeometry(boxGeometryParams.x, boxGeometryParams.y, boxGeometryParams.z);
         const material = new MeshBasicMaterial({
             color: '#ff0000'
         });
         this.#point = new Mesh(geometry, material);
         this.#point.position.set(x, y, z);
+        this.#point.lookAt(lookAtPoint);
+        this.#point.geometry.applyMatrix4(
+            new Matrix4().makeTranslation(0, 0, -boxGeometryParams.z/2)
+        );
     }
 
     get mesh() {
