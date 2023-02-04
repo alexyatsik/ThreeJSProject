@@ -4,8 +4,8 @@ import {degToRad} from "three/src/math/MathUtils";
 export class Point {
     #point
     constructor(latitude, longitude, radius) {
-        if (!latitude || !longitude || !radius)
-            throw new Error('Latitude or Longitude is not set');
+        if (latitude === undefined || longitude === undefined || radius === undefined)
+            throw new Error('Latitude, longitude or radius is not set');
 
         const x = radius * Math.cos(degToRad(latitude)) * Math.sin(degToRad(longitude));
         const y = radius * Math.sin(degToRad(latitude));
