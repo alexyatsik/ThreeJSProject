@@ -3,7 +3,6 @@ import {Atmosphere} from "./Atmosphere";
 import {Group} from "three";
 import gsap from "gsap";
 import {Point} from "./Point";
-import {degToRad} from "three/src/math/MathUtils";
 
 export class Earth {
     #globe
