@@ -5,9 +5,8 @@ import {createRenderer} from "./system/renderer";
 import {Loop} from "./system/Loop";
 import {createControls} from "./system/controls";
 import {Resizer} from "./system/Resizer";
-import {createLights} from "./components/lights";
-import {createEarthGlobe} from "./components/earthGlobe/earthGlobe";
-import {createStars} from "./components/earthGlobe/stars";
+import {Stars} from "./components/earthGlobe/Stars";
+import {Earth} from "./components/earthGlobe/Earth";
 
 export class World {
     #scene
@@ -21,12 +20,9 @@ export class World {
         this.#scene = createScene();
         this.#camera = createCamera();
         this.#renderer = createRenderer(canvas.DOMElement);
-        // parent.append(this.#renderer.domElement);
         this.#loop = new Loop(this.#scene, this.#camera, this.#renderer);
         // this.#controls = createControls(this.#camera, this.#renderer.domElement);
         new Resizer(canvas.DOMElement.parentElement, this.#camera, this.#renderer);
-
-        // const lights = createLights();
 
         this.#loop.addUpdatable(
           // this.#controls,
@@ -34,15 +30,14 @@ export class World {
     }
 
     async init() {
-        const earthGroup = createEarthGlobe();
-        const stars = createStars();
+        const earth = new Earth(5);
+        const stars = new Stars();
         this.#scene.add(
-            earthGroup.earthGlobeGroup,
-            stars
+            earth.group,
+            stars.points
         );
         this.#loop.addUpdatable(
-            earthGroup.globe,
-            earthGroup.earthGlobeGroup
+            earth
         );
     }
 
