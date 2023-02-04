@@ -1,18 +1,25 @@
 import {Mesh, MeshBasicMaterial, SphereGeometry} from "three";
+import {degToRad} from "three/src/math/MathUtils";
 
 export class Point {
-    constructor() {
-        const x = radius * Math.cos(latitude) * Math.sin(longitude);
-        const y = radius * Math.sin(latitude);
-        const z = radius * Math.cos(latitude) * Math.cos(longitude);
+    #point
+    constructor(latitude, longitude, radius) {
+        if (!latitude || !longitude || !radius)
+            throw new Error('Latitude or Longitude is not set');
 
-        const geometry = new SphereGeometry(1, 50, 50);
+        const x = radius * Math.cos(degToRad(latitude)) * Math.sin(degToRad(longitude));
+        const y = radius * Math.sin(degToRad(latitude));
+        const z = radius * Math.cos(degToRad(latitude)) * Math.cos(degToRad(longitude));
+
+        const geometry = new SphereGeometry(0.1, 50, 50);
         const material = new MeshBasicMaterial({
             color: '#ff0000'
         });
-        const point = new Mesh(geometry, material);
-        point.position.set(x, y, z);
+        this.#point = new Mesh(geometry, material);
+        this.#point.position.set(x, y, z);
+    }
 
-        // 48.3794° N, 31.1656° E - Ukraine
+    get mesh() {
+        return this.#point;
     }
 }
