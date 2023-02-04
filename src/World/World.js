@@ -18,14 +18,13 @@ export class World {
     constructor(parent = document.body) {
         const canvas = new BaseElement('canvas')
             .appendTo(parent);
-
         this.#scene = createScene();
         this.#camera = createCamera();
         this.#renderer = createRenderer(canvas.DOMElement);
         // parent.append(this.#renderer.domElement);
         this.#loop = new Loop(this.#scene, this.#camera, this.#renderer);
         // this.#controls = createControls(this.#camera, this.#renderer.domElement);
-        new Resizer(parent, this.#camera, this.#renderer);
+        new Resizer(canvas.DOMElement.parentElement, this.#camera, this.#renderer);
 
         // const lights = createLights();
 

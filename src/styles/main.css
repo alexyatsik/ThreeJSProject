@@ -1,14 +1,21 @@
 html {
     height: 100vh;
+
+
 }
 
 body {
     margin: 0;
-    /*overflow: hidden;*/
+    overflow: hidden;
     height: 100%;
 }
 
 .root {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    display: flex;
+}
+
+.canvas-wrapper,
+.content-wrapper {
+    width: 50%;
 }
