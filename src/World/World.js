@@ -14,15 +14,24 @@ export class World {
     #renderer
     #loop
     #controls
+    #pointer = {x: 0, y: 0}
+    #canvas = new BaseElement('canvas');
     constructor(parent = document.body) {
-        const canvas = new BaseElement('canvas')
-            .appendTo(parent);
+        this.#canvas.appendTo(parent);
         this.#scene = createScene();
         this.#camera = createCamera();
-        this.#renderer = createRenderer(canvas.DOMElement);
-        this.#loop = new Loop(this.#scene, this.#camera, this.#renderer);
+        this.#renderer = createRenderer(this.#canvas.DOMElement);
+
+        this.#setupPointer();
+
+        this.#loop = new Loop(
+            this.#scene,
+            this.#camera,
+            this.#renderer,
+            this.#pointer
+        );
         // this.#controls = createControls(this.#camera, this.#renderer.domElement);
-        new Resizer(canvas.DOMElement.parentElement, this.#camera, this.#renderer);
+        new Resizer(this.#canvas.DOMElement.parentElement, this.#camera, this.#renderer);
 
         this.#loop.addUpdatable(
           // this.#controls,
@@ -30,7 +39,7 @@ export class World {
     }
 
     async init() {
-        const earth = new Earth(5);
+        const earth = new Earth(5, this.#pointer);
         const stars = new Stars();
         this.#scene.add(
             earth.group,
@@ -51,5 +60,13 @@ export class World {
 
     stop() {
         this.#loop.stop();
+    }
+
+    #setupPointer() {
+        const divider = innerWidth / this.#canvas.DOMElement.parentElement.getBoundingClientRect().width;
+        addEventListener('mousemove', (event) => {
+            this.#pointer.x = ((event.clientX - innerWidth / divider) / (innerWidth / divider)) * 2 - 1;
+            this.#pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+        });
     }
 }

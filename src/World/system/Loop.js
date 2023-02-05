@@ -1,15 +1,19 @@
-import {Clock} from "three";
+import {Clock, Raycaster} from "three";
 
 export class Loop {
   #scene
   #camera
   #renderer
+  #raycaster
   #updatables
   #clock
-  constructor(scene, camera, renderer) {
+  #pointer
+  constructor(scene, camera, renderer, pointer) {
     this.#scene = scene;
     this.#camera = camera;
     this.#renderer = renderer;
+    this.#raycaster = new Raycaster();
+    this.#pointer = pointer;
     this.#updatables = [];
     this.#clock = new Clock();
   }
@@ -17,6 +21,15 @@ export class Loop {
   start() {
     this.#renderer.setAnimationLoop(()=> {
       this.#tick();
+
+      this.#raycaster.setFromCamera( this.#pointer, this.#camera );
+
+      const earthGroup = this.#scene.children.find(child => child.name === 'Earth Group');
+      const countriesPoints = earthGroup.children.find(child => child.name === 'Countries points');
+      const intersects = this.#raycaster.intersectObjects( countriesPoints.children );
+      for ( let i = 0; i < intersects.length; i ++ ) {
+        console.log('raycast pew pew')
+      }
 
       this.#renderer.render(this.#scene, this.#camera);
     });
