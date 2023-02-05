@@ -15,7 +15,14 @@ export class World {
     #renderer
     #loop
     #controls
-    #pointer = {x: 0, y: 0}
+    #earth
+    #pointer = {
+        x: 0,
+        y: 0,
+        down: false,
+        prevX: 0,
+        prevY: 0
+    }
     #canvas = new BaseElement('canvas');
     constructor(parent = document.body) {
         this.#canvas.appendTo(parent);
@@ -43,15 +50,15 @@ export class World {
     }
 
     async init() {
-        const earth = new Earth(5);
+        this.#earth = new Earth(5);
         const stars = new Stars();
         this.#scene.add(
-            earth.group,
+            this.#earth.group,
             stars.points
         );
-        this.#loop.addUpdatable(
-            earth
-        );
+        // this.#loop.addUpdatable(
+        //     this.#earth
+        // );
     }
 
     render() {
@@ -73,6 +80,23 @@ export class World {
             this.#pointer.AbsX = (innerWidth - event.clientX);
             this.#pointer.y = -(event.clientY / innerHeight) * 2 + 1;
             this.#pointer.AbsY = (innerHeight - event.clientY);
+
+            if (this.#pointer.down) {
+                const deltaX = this.#pointer.x - this.#pointer.prevX;
+                const deltaY = this.#pointer.y - this.#pointer.prevY;
+
+                this.#earth.group.rotation.y += deltaX * 0.005;
+                this.#earth.group.rotation.x += deltaY * 0.005;
+            }
+        });
+        addEventListener('mouseup', () => {
+           this.#pointer.down = false;
+
+            this.#pointer.prevX = this.#pointer.x;
+            this.#pointer.prevY = this.#pointer.y;
+        });
+        this.#canvas.event('mousedown', () => {
+            this.#pointer.down = true
         });
     }
 }

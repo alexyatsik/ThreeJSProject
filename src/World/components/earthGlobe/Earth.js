@@ -35,7 +35,7 @@ export class Earth {
         //     y: this.#mouse.x * 200 * delta,
         //     duration: 2
         // });
-        this.#earthGroup.rotation.y += 0.1 * delta;
+        // this.#earthGroup.rotation.y += 0.1 * delta;
     }
 
     #addCountriesPointsToTheGroup() {
@@ -57,45 +57,6 @@ export class Earth {
                     .mesh
             )
         });
-
-        // this.#points.add(
-            // new Point(
-            //     48.3794,
-            //     31.1656,
-            //     pointOptions,
-            //     {
-            //         countryName: 'Ukraine',
-            //         countryPopulation: '43.79 million'
-            //     })
-            //     .mesh,
-            // new Point(
-            //     -14.2350,
-            //     -51.9253,
-            //     pointOptions,
-            //     {
-            //         countryName: 'Brazil',
-            //         countryPopulation: '214.3 million'
-            //     })
-            //     .mesh,
-            // new Point(
-            //     37.0902,
-            //     -95.7129,
-            //     pointOptions,
-            //     {
-            //         countryName: 'USA',
-            //         countryPopulation: '331.9 million'
-            //     })
-            //     .mesh,
-            // new Point(
-            //     35.8617,
-            //     104.1954,
-            //     pointOptions,
-            //     {
-            //         countryName: 'China',
-            //         countryPopulation: '1.412 billion'
-            //     })
-            //     .mesh,
-        // );
 
         this.#earthGroup.add(this.#points);
     }
