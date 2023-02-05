@@ -7,6 +7,7 @@ import {createControls} from "./system/controls";
 import {Resizer} from "./system/Resizer";
 import {Stars} from "./components/earthGlobe/Stars";
 import {Earth} from "./components/earthGlobe/Earth";
+import {Tooltip} from "./components/earthGlobe/Tooltip";
 
 export class World {
     #scene
@@ -22,13 +23,16 @@ export class World {
         this.#camera = createCamera();
         this.#renderer = createRenderer(this.#canvas.DOMElement);
 
+        const tooltip = new Tooltip();
+
         this.#setupPointer();
 
         this.#loop = new Loop(
             this.#scene,
             this.#camera,
             this.#renderer,
-            this.#pointer
+            this.#pointer,
+            tooltip
         );
         // this.#controls = createControls(this.#camera, this.#renderer.domElement);
         new Resizer(this.#canvas.DOMElement.parentElement, this.#camera, this.#renderer);
@@ -66,7 +70,9 @@ export class World {
         const divider = innerWidth / this.#canvas.DOMElement.parentElement.getBoundingClientRect().width;
         addEventListener('mousemove', (event) => {
             this.#pointer.x = ((event.clientX - innerWidth / divider) / (innerWidth / divider)) * 2 - 1;
+            this.#pointer.AbsX = (innerWidth - event.clientX);
             this.#pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+            this.#pointer.AbsY = (innerHeight - event.clientY);
         });
     }
 }

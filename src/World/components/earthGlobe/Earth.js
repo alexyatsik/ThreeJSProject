@@ -45,25 +45,25 @@ export class Earth {
 
         this.#points.add(
             // Ukraine
-            new Point(48.3794, 31.1656, pointOptions).mesh,
+            new Point(48.3794, 31.1656, pointOptions, {countryName: 'Ukraine'}).mesh,
             // Italy
-            new Point(41.8719, 12.5674, pointOptions).mesh,
+            new Point(41.8719, 12.5674, pointOptions, {countryName: 'Italy'}).mesh,
             // Brazil
-            new Point(-14.2350, -51.9253, pointOptions).mesh,
+            new Point(-14.2350, -51.9253, pointOptions, {countryName: 'Brazil'}).mesh,
             // USA
-            new Point(37.0902, -95.7129, pointOptions).mesh,
+            new Point(37.0902, -95.7129, pointOptions, {countryName: 'USA'}).mesh,
             // China
-            new Point(35.8617, 104.1954, pointOptions).mesh,
+            new Point(35.8617, 104.1954, pointOptions, {countryName: 'China'}).mesh,
             // Japan
-            new Point(36.2048, 138.2529, pointOptions).mesh,
+            new Point(36.2048, 138.2529, pointOptions, {countryName: 'Japan'}).mesh,
             // UK
-            new Point(55.3781, -3.4360, pointOptions).mesh,
+            new Point(55.3781, -3.4360, pointOptions, {countryName: 'UK'}).mesh,
             // Canada
-            new Point(56.1304, -106.3468, pointOptions).mesh,
+            new Point(56.1304, -106.3468, pointOptions, {countryName: 'Canada'}).mesh,
             // India
-            new Point(20.5937, 78.9629, pointOptions).mesh,
+            new Point(20.5937, 78.9629, pointOptions, {countryName: 'India'}).mesh,
             // Argentina
-            new Point(-38.4161, -63.6167, pointOptions).mesh,
+            new Point(-38.4161, -63.6167, pointOptions, {countryName: 'Argentina'}).mesh,
         );
 
         this.#earthGroup.add(this.#points);

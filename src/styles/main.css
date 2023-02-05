@@ -20,6 +20,24 @@ a {
  text-decoration: none;
 }
 
+h4 {
+    margin: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#tooltip {
+    position: fixed;
+    padding: 8px;
+    background-color: rgba(0,0,0, 0.6);
+    backdrop-filter: blur(5px);
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    border-radius: 8px;
+}
+
 .root {
     display: flex;
 

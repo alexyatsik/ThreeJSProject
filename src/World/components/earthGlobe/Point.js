@@ -13,7 +13,8 @@ export class Point {
     #lookAtPoint
     #latitude
     #longitude
-    constructor(latitude, longitude, options) {
+    #tooltipData
+    constructor(latitude, longitude, options, tooltipData) {
         if (latitude === undefined || longitude === undefined || options.radius === undefined)
             throw new Error('Latitude, longitude or radius is not set');
 
@@ -21,6 +22,7 @@ export class Point {
         this.#lookAtPoint = options?.lookAtPoint || null;
         this.#latitude = latitude;
         this.#longitude = longitude;
+        this.#tooltipData = tooltipData;
 
         this.#build();
         this.#applyAnimation();
@@ -40,9 +42,14 @@ export class Point {
             this.#boxGeometryParams.y,
             this.#boxGeometryParams.z
         );
+
+        const materialBasicOpacity = 0.4;
         const material = new MeshBasicMaterial({
-            color: '#3bf7ff'
+            color: '#3bf7ff',
+            transparent: true,
+            opacity: materialBasicOpacity
         });
+        material.basicOpacity = materialBasicOpacity;
 
         this.#point = new Mesh(geometry, material);
         this.#point.position.set(x, y, z);
@@ -51,11 +58,12 @@ export class Point {
         this.#point.geometry.applyMatrix4(
             new Matrix4().makeTranslation(0, 0, -this.#boxGeometryParams.z/2)
         );
+        this.#point.tooltipData = this.#tooltipData;
     }
 
     #applyAnimation() {
         gsap.to(this.#point.scale, {
-            z: 0,
+            z: 1.4,
             duration: 2,
             yoyo: true,
             repeat: -1,
