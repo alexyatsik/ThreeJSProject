@@ -52,7 +52,7 @@ export class Earth {
                     pointOptions,
                     {
                         countryName: country.name.common,
-                        countryPopulation: new Intl.NumberFormat().format(country.population)
+                        countryPopulation: country.population
                     })
                     .mesh
             )

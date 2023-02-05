@@ -16,7 +16,9 @@ export class Tooltip extends BaseElement {
 
     updateContent(object) {
         this.#countryNameElement.innerHtml(object.object.tooltipData?.countryName);
-        this.#countryPopulationValue.innerHtml(object.object.tooltipData?.countryPopulation)
+        this.#countryPopulationValue.innerHtml(
+            new Intl.NumberFormat().format(object.object.tooltipData?.countryPopulation)
+        );
     }
 
     updatePosition(x, y) {

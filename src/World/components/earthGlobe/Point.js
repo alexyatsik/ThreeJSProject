@@ -4,11 +4,6 @@ import {gsap} from 'gsap';
 
 export class Point {
     #point
-    #boxGeometryParams = {
-        x: 0.2,
-        y: 0.2,
-        z: 0.8
-    }
     #radius
     #lookAtPoint
     #latitude
@@ -33,14 +28,16 @@ export class Point {
     }
 
     #build() {
-        const x = this.#radius * Math.cos(degToRad(this.#latitude)) * Math.sin(degToRad(this.#longitude));
-        const y = this.#radius * Math.sin(degToRad(this.#latitude));
-        const z = this.#radius * Math.cos(degToRad(this.#latitude)) * Math.cos(degToRad(this.#longitude));
-
+        const scale = this.#tooltipData.countryPopulation / 1000000000;
+        const boxGeometryParams = {
+            x: Math.max(0.2 * scale, 0.1),
+            y: Math.max(0.2 * scale, 0.1),
+            z: Math.max(0.8 * scale, 0.1)
+        }
         const geometry = new BoxGeometry(
-            this.#boxGeometryParams.x,
-            this.#boxGeometryParams.y,
-            this.#boxGeometryParams.z
+            boxGeometryParams.x,
+            boxGeometryParams.y,
+            boxGeometryParams.z
         );
 
         const materialBasicOpacity = 0.4;
@@ -52,12 +49,19 @@ export class Point {
         material.basicOpacity = materialBasicOpacity;
 
         this.#point = new Mesh(geometry, material);
+
+        const x = this.#radius * Math.cos(degToRad(this.#latitude)) * Math.sin(degToRad(this.#longitude));
+        const y = this.#radius * Math.sin(degToRad(this.#latitude));
+        const z = this.#radius * Math.cos(degToRad(this.#latitude)) * Math.cos(degToRad(this.#longitude));
         this.#point.position.set(x, y, z);
+
         if (this.#lookAtPoint)
             this.#point.lookAt(this.#lookAtPoint);
+
         this.#point.geometry.applyMatrix4(
-            new Matrix4().makeTranslation(0, 0, -this.#boxGeometryParams.z/2)
+            new Matrix4().makeTranslation(0, 0, -boxGeometryParams.z/2)
         );
+
         this.#point.tooltipData = this.#tooltipData;
     }
 
