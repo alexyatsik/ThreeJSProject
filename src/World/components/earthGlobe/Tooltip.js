@@ -33,9 +33,17 @@ export class Tooltip extends BaseElement {
             .addClass('tooltip__country-data')
             .appendTo(this.DOMElement);
 
-        const countryPopulation = new BaseElement()
-            .addClass('tooltip__country-population')
-            .appendTo(countryDataWrapper);
+        const populationWrapper = new BaseElement()
+            .addClass('tooltip__data-item')
+            .appendTo(countryDataWrapper.DOMElement);
 
+        new BaseElement('span')
+            .addClass('tooltip__data-title')
+            .innerHtml('Population: ')
+            .appendTo(populationWrapper.DOMElement);
+        new BaseElement('span')
+            .addClass('tooltip__data-value')
+            .innerHtml('DATA_VALUE')
+            .appendTo(populationWrapper.DOMElement)
     }
 }

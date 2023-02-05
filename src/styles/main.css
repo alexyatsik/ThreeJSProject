@@ -30,7 +30,7 @@ h4 {
 
 #tooltip {
     position: fixed;
-    padding: 8px;
+    padding: 16px;
     background-color: rgba(0,0,0, 0.6);
     backdrop-filter: blur(5px);
     color: #ffffff;
