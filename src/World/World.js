@@ -39,7 +39,7 @@ export class World {
     }
 
     async init() {
-        const earth = new Earth(5, this.#pointer);
+        const earth = new Earth(5);
         const stars = new Stars();
         this.#scene.add(
             earth.group,

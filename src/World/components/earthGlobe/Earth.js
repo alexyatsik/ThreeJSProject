@@ -8,12 +8,10 @@ export class Earth {
     #globe
     #atmosphere
     #earthGroup = new Group();
-    #mouse
     #radius
     #points = new Group();
-    constructor(radius, mousePointer) {
+    constructor(radius) {
         this.#radius = radius;
-        this.#mouse = mousePointer;
         this.#globe = new Globe(this.#radius);
         this.#atmosphere = new Atmosphere(this.#radius);
         this.#points.name = "Countries points";
@@ -31,11 +29,12 @@ export class Earth {
     }
 
     tick(delta) {
-        gsap.to(this.#earthGroup.rotation, {
-            x: -this.#mouse.y * 100 * delta,
-            y: this.#mouse.x * 200 * delta,
-            duration: 2
-        });
+        // gsap.to(this.#earthGroup.rotation, {
+        //     x: -this.#mouse.y * 100 * delta,
+        //     y: this.#mouse.x * 200 * delta,
+        //     duration: 2
+        // });
+        this.#earthGroup.rotation.y += 0.2 * delta;
     }
 
     #addCountriesPointsToTheGroup() {
