@@ -3,6 +3,7 @@ import {Atmosphere} from "./Atmosphere";
 import {Group} from "three";
 import gsap from "gsap";
 import {Point} from "./Point";
+import countriesData from '../../../assets/json/countries.json';
 
 export class Earth {
     #globe
@@ -34,7 +35,7 @@ export class Earth {
         //     y: this.#mouse.x * 200 * delta,
         //     duration: 2
         // });
-        this.#earthGroup.rotation.y += 0.2 * delta;
+        this.#earthGroup.rotation.y += 0.1 * delta;
     }
 
     #addCountriesPointsToTheGroup() {
@@ -43,28 +44,58 @@ export class Earth {
             lookAtPoint: this.#globe.mesh.position
         }
 
-        this.#points.add(
-            // Ukraine
-            new Point(48.3794, 31.1656, pointOptions, {countryName: 'Ukraine'}).mesh,
-            // Italy
-            new Point(41.8719, 12.5674, pointOptions, {countryName: 'Italy'}).mesh,
-            // Brazil
-            new Point(-14.2350, -51.9253, pointOptions, {countryName: 'Brazil'}).mesh,
-            // USA
-            new Point(37.0902, -95.7129, pointOptions, {countryName: 'USA'}).mesh,
-            // China
-            new Point(35.8617, 104.1954, pointOptions, {countryName: 'China'}).mesh,
-            // Japan
-            new Point(36.2048, 138.2529, pointOptions, {countryName: 'Japan'}).mesh,
-            // UK
-            new Point(55.3781, -3.4360, pointOptions, {countryName: 'UK'}).mesh,
-            // Canada
-            new Point(56.1304, -106.3468, pointOptions, {countryName: 'Canada'}).mesh,
-            // India
-            new Point(20.5937, 78.9629, pointOptions, {countryName: 'India'}).mesh,
-            // Argentina
-            new Point(-38.4161, -63.6167, pointOptions, {countryName: 'Argentina'}).mesh,
-        );
+        countriesData.forEach((country) => {
+            this.#points.add(
+                new Point(
+                    country.latlng[0],
+                    country.latlng[1],
+                    pointOptions,
+                    {
+                        countryName: country.name.common,
+                        countryPopulation: new Intl.NumberFormat().format(country.population)
+                    })
+                    .mesh
+            )
+        });
+
+        // this.#points.add(
+            // new Point(
+            //     48.3794,
+            //     31.1656,
+            //     pointOptions,
+            //     {
+            //         countryName: 'Ukraine',
+            //         countryPopulation: '43.79 million'
+            //     })
+            //     .mesh,
+            // new Point(
+            //     -14.2350,
+            //     -51.9253,
+            //     pointOptions,
+            //     {
+            //         countryName: 'Brazil',
+            //         countryPopulation: '214.3 million'
+            //     })
+            //     .mesh,
+            // new Point(
+            //     37.0902,
+            //     -95.7129,
+            //     pointOptions,
+            //     {
+            //         countryName: 'USA',
+            //         countryPopulation: '331.9 million'
+            //     })
+            //     .mesh,
+            // new Point(
+            //     35.8617,
+            //     104.1954,
+            //     pointOptions,
+            //     {
+            //         countryName: 'China',
+            //         countryPopulation: '1.412 billion'
+            //     })
+            //     .mesh,
+        // );
 
         this.#earthGroup.add(this.#points);
     }

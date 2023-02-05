@@ -2,6 +2,7 @@ import {BaseElement} from "../../../utils/BaseElement";
 
 export class Tooltip extends BaseElement {
     #countryNameElement
+    #countryPopulationValue
     constructor() {
         super();
 
@@ -15,6 +16,7 @@ export class Tooltip extends BaseElement {
 
     updateContent(object) {
         this.#countryNameElement.innerHtml(object.object.tooltipData?.countryName);
+        this.#countryPopulationValue.innerHtml(object.object.tooltipData?.countryPopulation)
     }
 
     updatePosition(x, y) {
@@ -41,7 +43,7 @@ export class Tooltip extends BaseElement {
             .addClass('tooltip__data-title')
             .innerHtml('Population: ')
             .appendTo(populationWrapper.DOMElement);
-        new BaseElement('span')
+        this.#countryPopulationValue = new BaseElement('span')
             .addClass('tooltip__data-value')
             .innerHtml('DATA_VALUE')
             .appendTo(populationWrapper.DOMElement)
