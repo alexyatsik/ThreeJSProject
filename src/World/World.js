@@ -81,22 +81,26 @@ export class World {
             this.#pointer.y = -(event.clientY / innerHeight) * 2 + 1;
             this.#pointer.AbsY = (innerHeight - event.clientY);
 
-            if (this.#pointer.down) {
-                const deltaX = this.#pointer.x - this.#pointer.prevX;
-                const deltaY = this.#pointer.y - this.#pointer.prevY;
 
+
+            if (this.#pointer.down) {
+                const deltaX = event.clientX - this.#pointer.prevX;
+                const deltaY = event.clientY - this.#pointer.prevY;
                 this.#earth.group.rotation.y += deltaX * 0.005;
                 this.#earth.group.rotation.x += deltaY * 0.005;
+                this.#pointer.prevX = event.clientX;
+                this.#pointer.prevY = event.clientY;
             }
         });
         addEventListener('mouseup', () => {
            this.#pointer.down = false;
 
-            this.#pointer.prevX = this.#pointer.x;
-            this.#pointer.prevY = this.#pointer.y;
+
         });
-        this.#canvas.event('mousedown', () => {
-            this.#pointer.down = true
+        this.#canvas.event('mousedown', ({clientX, clientY}) => {
+            this.#pointer.down = true;
+            this.#pointer.prevX = clientX;
+            this.#pointer.prevY = clientY;
         });
     }
 }
