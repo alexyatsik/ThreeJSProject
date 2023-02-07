@@ -17,7 +17,7 @@ canvas {
 }
 
 a {
- text-decoration: none;
+    text-decoration: none;
 }
 
 h4 {
@@ -31,7 +31,7 @@ h4 {
 #tooltip {
     position: fixed;
     padding: 16px;
-    background-color: rgba(0,0,0, 0.6);
+    background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
     color: #ffffff;
     font-family: Arial, sans-serif;
@@ -81,4 +81,21 @@ h4 {
     color: white;
     padding: 16px;
     border-radius: 20px;
+}
+
+
+@media screen and (max-width: 800px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .root {
+        flex-direction: column;
+    }
+
+    .canvas-wrapper,
+    .content-wrapper {
+        width: 100%;
+        height: 100%
+    }
 }

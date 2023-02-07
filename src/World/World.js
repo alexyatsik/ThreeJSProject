@@ -76,12 +76,18 @@ export class World {
     #setupPointer() {
         const divider = innerWidth / this.#canvas.DOMElement.parentElement.getBoundingClientRect().width;
         addEventListener('mousemove', (event) => {
-            this.#pointer.x = ((event.clientX - innerWidth / divider) / (innerWidth / divider)) * 2 - 1;
-            this.#pointer.AbsX = (innerWidth - event.clientX);
-            this.#pointer.y = -(event.clientY / innerHeight) * 2 + 1;
-            this.#pointer.AbsY = (innerHeight - event.clientY);
-
-
+            event.preventDefault();
+            if (innerWidth > 800) {
+                this.#pointer.x = ((event.clientX - innerWidth / divider) / (innerWidth / divider)) * 2 - 1;
+                this.#pointer.AbsX = (innerWidth - event.clientX);
+                this.#pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+                this.#pointer.AbsY = (innerHeight - event.clientY);
+            } else {
+                this.#pointer.x = (event.clientX / innerWidth) * 2 - 1;
+                this.#pointer.AbsX = (innerWidth - event.clientX);
+                this.#pointer.y = -((event.clientY - 4) / innerHeight) * 4 + 3;
+                this.#pointer.AbsY = (innerHeight - event.clientY);
+            }
 
             if (this.#pointer.down) {
                 const deltaX = event.clientX - this.#pointer.prevX;
@@ -92,15 +98,51 @@ export class World {
                 this.#pointer.prevY = event.clientY;
             }
         });
+
         addEventListener('mouseup', () => {
            this.#pointer.down = false;
-
-
         });
+
         this.#canvas.event('mousedown', ({clientX, clientY}) => {
             this.#pointer.down = true;
             this.#pointer.prevX = clientX;
             this.#pointer.prevY = clientY;
+        });
+
+        addEventListener('touchmove', (event) => {
+            event.clientX = event.touches[0].clientX;
+            event.clientY = event.touches[0].clientY;
+
+            const doesIntersectGlobe = this.#loop.raycaster.intersectObject(this.#earth.group);
+
+            if (doesIntersectGlobe.length === 0) return;
+
+            this.#pointer.down = true;
+
+            // if (innerWidth > 800) {
+            //     this.#pointer.x = ((event.clientX - innerWidth / divider) / (innerWidth / divider)) * 2 - 1;
+            //     this.#pointer.AbsX = (innerWidth - event.clientX);
+            //     this.#pointer.y = -(event.clientY / innerHeight) * 2 + 1;
+            //     this.#pointer.AbsY = (innerHeight - event.clientY);
+            // } else {
+                this.#pointer.x = (event.clientX / innerWidth) * 2 - 1;
+                this.#pointer.AbsX = (innerWidth - event.clientX);
+                this.#pointer.y = -((event.clientY - 4) / innerHeight) * 4 + 3;
+                this.#pointer.AbsY = (innerHeight - event.clientY);
+            // }
+
+            if (this.#pointer.down) {
+                const deltaX = event.clientX - this.#pointer.prevX;
+                const deltaY = event.clientY - this.#pointer.prevY;
+                this.#earth.group.rotation.y += deltaX * 0.005;
+                this.#earth.group.rotation.x += deltaY * 0.005;
+                this.#pointer.prevX = event.clientX;
+                this.#pointer.prevY = event.clientY;
+            }
+        }, {passive: false});
+
+        addEventListener('touchend', () => {
+            this.#pointer.down = false;
         });
     }
 }

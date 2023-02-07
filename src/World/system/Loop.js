@@ -60,4 +60,8 @@ export class Loop {
       object.tick(delta);
     }
   }
+
+  get raycaster() {
+    return this.#raycaster;
+  }
 }
